@@ -69,6 +69,7 @@
         padding: 0.5rem 1rem;          
         
         background-color: rgb(255, 255, 255);
+        overflow-y: auto;
     }
     
     aside > #tags{
@@ -76,32 +77,33 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        margin-top: 25%;
-        overflow-y: hidden;
-        
+        padding-top: 20px;
         font-size: 0.8rem;
+
     }
+    
+
     .tag {
         display: flex;
         justify-content: space-between;
         max-width: 70%;
         width: 70%;
-        height: 20px;
-        padding-left: 10px;
+        padding-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         margin-bottom: 10px;
         border-radius: 50px;
         box-sizing: content-box;     
         
-        
         background-color: #e2e2e2;
     }
 
-    .tag > span {
+    .tag > div {
         overflow-x: auto;
         overflow-y: hidden;
         
     }
-    .tag > span::-webkit-scrollbar {
+    .tag > div::-webkit-scrollbar, aside > #tags::-webkit-scrollbar {
         display: none;
         
     }
@@ -161,8 +163,7 @@
 
     }
     .card {
-        width: 150px;
-        height: 150px;
+        
         border: none;
         user-select: none;
         
@@ -170,8 +171,12 @@
  
     #atual_card {
         z-index: -50;
+        width: 230px;
+        min-width: 150px;
+        height: 230px;
+        min-height: 150px;
         margin-top: 90px;
-        margin-left: 50px;
+        margin-left: auto;
 
         background-color: rgb(95, 134, 160);
         box-shadow: -20px 20px 5px rgba(0, 0, 0, 0.418);
@@ -180,9 +185,10 @@
     #arrows {
         display: flex;
         width: 200px;
-        margin-left: 20px;
-        margin-top: 2rem;
+        margin-left: auto;
+        margin-top: 1rem;
         justify-content: space-between;
+        user-select: none;
     }
     #to_discard {
         width: 80%;
