@@ -68,7 +68,7 @@
     }
     .to_rigth>section {
         width: 80%;
-        padding: 10px;
+        padding: 10px 25px;
         overflow: hidden;
         
     }
@@ -93,6 +93,7 @@
     aside {
         display: flex;
         flex-direction: column;
+        min-width: 35%;
         padding: 0.5rem 1rem;          
         
         background-color: rgb(255, 255, 255);
@@ -187,7 +188,7 @@
     }
     #section_cards {
         display: flex;
-        width: 50%;
+        width: 100%;
         height: 100%;
         justify-content: space-between;
         flex-direction: column;
@@ -208,9 +209,9 @@
     }
  
     #atual_card {
-        width: 18rem;
+        width: 13rem;
         min-width: 150px;
-        height: 18rem;
+        height: 13rem;
         min-height: 150px;
         margin-left: auto;
 
