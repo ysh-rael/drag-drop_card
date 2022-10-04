@@ -6,6 +6,12 @@
     #005E58
     */
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');   /*  */
+
+    @keyframes tremer {
+        0% {
+            
+        }
+    }
     
     * {
         border-radius: 5px;
@@ -121,7 +127,7 @@
     .menu_create_tag {
         display: flex;
         justify-content: space-between;
-        padding: 0.5rem 0.5rem;
+        padding: 1rem 1rem;
         margin-bottom: 2rem;
 
         background-color: #e4e3e3;
@@ -141,7 +147,7 @@
     }
     #inpt_name_tag {
         padding: 1px 10px;
-        width: 100%;
+        width: 85%;
         
     }
 
@@ -158,7 +164,8 @@
 
     }
     .cards {
-        display: block;
+        display: flex;
+        flex-direction: column;
         margin: 0 auto;
 
     }
@@ -170,29 +177,32 @@
     }
  
     #atual_card {
-        z-index: -50;
-        width: 230px;
+        width: 18rem;
         min-width: 150px;
-        height: 230px;
+        height: 18rem;
         min-height: 150px;
-        margin-top: 90px;
         margin-left: auto;
 
         background-color: rgb(95, 134, 160);
-        box-shadow: -20px 20px 5px rgba(0, 0, 0, 0.418);
+        box-shadow: -100px 100px 1px -40px rgba(199, 118, 18, 0.853); /* fazer alteração com js para sombrar ser prox card */
 
     }
     #arrows {
         display: flex;
         width: 200px;
         margin-left: auto;
-        margin-top: 1rem;
+        margin-right: auto;
+        margin-top: 3.5rem;
         justify-content: space-between;
         user-select: none;
+
+        font-size: 3rem;
+
+        color: #4c4c4c;
     }
     #to_discard {
         width: 80%;
-        padding: 35px;
+        padding: 3rem;
         margin: 0 auto 1rem auto;
 
         text-align: center;
@@ -202,11 +212,22 @@
     }
     #social {
         display: flex;
+        flex-direction: row;
     }
-    .social_ico {
-        margin-right: 10px;
+    .social_ico > img {
+        padding: 0.7rem;
+        margin: 3px 5px;
+        width: 50px;
+        background-color: rgb(228, 228, 229);
+        user-select: none;
+        -webkit-user-select: none;
         
-        background-color: rgb(235, 235, 203);
+    }
+    .social_ico > img:hover {
+        content: "olá mundo";
+        background-color: #bdbbbb;
+        
+        animation: tremer normal infinite;
     }
 }
 
