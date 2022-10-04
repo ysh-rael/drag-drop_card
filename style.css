@@ -157,15 +157,14 @@
     }
     .menu_create_tag > div {
         display: flex;
+        width: 6rem;
         margin-left: 5px;
         justify-content: space-between;
 
     }
     .bttn_menu_create_tag {
-        min-width: 45px;
-        width: 3rem;
-        height: 3rem;
-        margin-right: 5px;
+        width: 2rem;
+        height: 2rem;
         padding: 0;
         border: none;
         background-color: rgb(204, 204, 204);
