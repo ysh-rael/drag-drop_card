@@ -246,7 +246,7 @@
     #to_discard {
         width: 80%;
         padding: 3rem;
-        margin: 0 auto 1rem auto;
+        margin: 0 auto 5px auto;
 
         text-align: center;
 
@@ -259,7 +259,7 @@
     }
     .social_ico > img {
         padding: 0.7rem;
-        margin: 3px 5px;
+        margin: 10px 10px 0 10px;
         width: 50px;
         background-color: rgb(228, 228, 229);
         user-select: none;
