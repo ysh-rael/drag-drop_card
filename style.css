@@ -496,6 +496,8 @@ body {
         text-align: center;
         transform: rotate(90deg);
         transition-duration: 1s;
+
+        font-size: 1.6rem;
         
     }
     #menu_bar:hover {
