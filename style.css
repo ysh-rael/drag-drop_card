@@ -789,7 +789,7 @@ body {
     #arrows {
         width: 150px;
         align-items: flex-end;
-        margin: 1.5rem auto 0 -50px;
+        margin: 1.5rem auto 0 -36px;
     }
 
     #to_discard {
