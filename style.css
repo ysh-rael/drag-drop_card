@@ -171,7 +171,7 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 1rem 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
 
         background-color: #e4e3e3;
         box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.452);
@@ -534,7 +534,8 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 1rem 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+
 
         background-color: #e4e3e3;
         box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.452);
