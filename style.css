@@ -768,6 +768,10 @@ body {
         box-shadow: -2px 2px 10px #0000004a,
             -3rem 1rem 1px 0px rgba(199, 118, 18, 0.853);
     }
+    #atual_card:hover {
+        box-shadow: -2px 2px 10px #0000004a,
+            -3rem 1rem 1px 0px rgba(199, 118, 18, 0.853);
+    }
 
     #arrows {
         width: 150px;
