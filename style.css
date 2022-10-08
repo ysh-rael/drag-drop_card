@@ -61,6 +61,10 @@ body {
     height: 100%;
 }
 
+.dropzone_tags_focus {
+    background-color: #454242;
+}
+
 @media (min-width: 900px) {
     main {
         display: flex;
@@ -733,8 +737,6 @@ body {
         align-items: flex-start;
         max-height: 100%;
         border-radius: 0;
-        
-
 
     }
 
@@ -742,17 +744,6 @@ body {
         height: 60%;
 
     }
-
-    aside {
-
-    }
-    .aside>#tags {
-    }
-
-    .to_rigth>section {
-
-    }
-
     #section_cards {
         min-height: 320px;
         justify-content: flex-end;
