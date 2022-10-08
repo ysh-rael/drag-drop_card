@@ -70,6 +70,9 @@ function Drop
         }
         
         function dragleave() {
+            const cardBeingDragged = document.querySelector('.is-dragging')
+            cardBeingDragged.style.display = 'none'
+            if(this === section_card) cardBeingDragged.style.display = 'block'
             removeSan(this, classOver)
         
         }
