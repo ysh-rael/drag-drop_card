@@ -29,91 +29,105 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
 function Drop
     (
         element,
+        initialZone,
+        to_discard = "#to_discard",
         pageHtml = false,
-        is_draging = '.is_draging',
         classOver = 'o_v_e_r',
+        is_draging = '.is-draging',
         essentialFunctions = false
     ) {
 
 
 
-        let dropzones = document.querySelectorAll(element)
-        const section_card = document.querySelector('#section_cards')
-
-        dropzones = Array.from(dropzones)
-        console.log(typeof dropzones)
-        dropzones.push(section_card)
-        console.log(dropzones.length)
+    let dropzones = document.querySelectorAll(element)
+    const _cards = document.querySelector(initialZone)
+    const discard = document.querySelector(to_discard)
 
 
+    const { addSan, removeSan } = essentialFunctions
 
-        dropzones.forEach(dropzone => {
-            dropzone.addEventListener('dragenter', dragenter)
-            dropzone.addEventListener('dragover', dragover)
-            dropzone.addEventListener('dragleave', dragleave)
-        })
-        
-        function dragenter() {
-            const cardBeingDragged = document.querySelector('.is-dragging')
-            if(this == section_card) {
-                const cards = document.querySelector('.cards')
-                // addSan(cards, cardBeingDragged)
-                cards.insertAdjacentElement('afterbegin', cardBeingDragged)
+    dropzones = Array.from(dropzones)
+    dropzones.push(_cards)
+    dropzones.push(discard)
 
-            } else { this.classList.add(classOver)
-        
-            addSan(this, cardBeingDragged)}
 
-        }
-        
-        function dragover() {
-        }
-        
-        function dragleave() {
-            const cardBeingDragged = document.querySelector('.is-dragging')
+
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragenter', dragenter)
+        dropzone.addEventListener('dragover', dragover)
+        dropzone.addEventListener('dragleave', dragleave)
+    })
+
+    function dragenter() {
+        const cardBeingDragged = document.querySelector(is_draging)
+        if (this == _cards) {
+            const cards = document.querySelector(initialZone)
+            cards.insertAdjacentElement('afterbegin', cardBeingDragged)
+
+        } else {
             cardBeingDragged.style.display = 'none'
-            if(this === section_card) cardBeingDragged.style.display = 'block'
-            removeSan(this, classOver)
+            this.classList.add(classOver)
+            addSan(this, cardBeingDragged)
+        }
+
+    }
+
+    function dragover() {
+    }
+
+    function dragleave() {
+        const cardBeingDragged = document.querySelector(is_draging)
+        cardBeingDragged.style.display = 'none'
+        if (this === _cards) cardBeingDragged.style.display = 'block'
+
+    }
+
+
+
+
+}
+
+
+
+    
+    function addSan(dad = this, san = false) {
+        if (san) {
+            try {
+                dad.append(san)
+                return dad
+            } catch (err) {
+                console.log("Could not add child in parent tag: \n", err)
+                
+                return false
+            }
+    
+        }
         
-        }
-
-
-
-
-}
-
-
-
-
-function addSan(dad = this, san = false) {
-    if (san) {
-        try {
-            dad.append(san)
-            return dad
-        } catch (err) {
-            console.log("Could not add child in parent tag: \n", err)
-
-            return false
-        }
-
     }
-
-}
-function removeSan(dad = this, san = false) {
-    if (san) {
-        try {
-            dad.remove(san)
-            return dad
-        } catch (err) {
-            console.log("Unable to remove child in parent tag: \n", err)
-            return false
+    function removeSan(dad = this, san = false) {
+        if (san) {
+            try {
+                dad.remove(san)
+                return dad
+            } catch (err) {
+                console.log("Unable to remove child in parent tag: \n", err)
+                return false
+            }
         }
+        
     }
+    
+    
+    
+    Drag('#atual_card', false);
 
-}
-
-
-
-
-Drag('#atual_card', false); 
-Drop(".dropzone_tags", { addSan, removeSan }, false, false, 'over')
+    
+    Drop(
+        ".dropzone_tags",
+        '.cards',
+        "#to_discard", 
+        false,
+        'over',
+        '.is-dragging',
+        { addSan, removeSan }
+        )
