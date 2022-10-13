@@ -1,3 +1,40 @@
+/*
+     ⣠⣦⣤⣀
+⠀⠀⠀⠀⢡😔⣿
+⠀⠀⠀⠀⠠⠜⢾⡟
+⠀⠀⠀⠀⠀⠹⠿⠃⠄
+⠀⠀⠈⠀⠉⠉⠑⠀⠀⠠⢈⣆
+⠀⠀⣄⠀⠀⠀⠀⠀⢶⣷⠃⢵
+⠐⠰⣷⠀⠀⠀⠀⢀⢟⣽⣆⠀⢃
+⠰⣾⣶⣤🙏⣦⣤⣴⣾⣿⣿⠞
+⠀⠈⠉⠉⠛⠛⠉⠉⠉⠙⠁
+⠀⠀⡐⠘⣿⣿⣯⠿⠛⣿⡄
+⠀⠀⠁⢀⣄⣄⣠⡥⠔⣻⡇
+⠀⠀⠀⠘⣛⣿⣟⣖⢭⣿⡇
+⠀⠀⢀⣿⣿⣿⣿⣷⣿⣽⡇
+⠀⠀⢸⣿⣿⣿⡇⣿⣿⣿⣇
+⠀⠀⠀⢹⣿⣿⡀⠸⣿⣿⡏
+⠀⠀⠀⢸⣿⣿⠇⠀⣿⣿⣿
+⠀⠀⠀⠈⣿⣿⠀⠀⢸⣿⡿
+⠀⠀⠀⠀⣿⣿⠀⠀⢀⣿⡇
+⠀⣠⣴⣿⡿⠟⠀⠀⢸⣿⣷
+⠀⠉⠉⠁⠀⠀⠀⠀⢸⣿⣿⠁POR FAVOR FUNCIONE!
+*/
+
+
+
+
+
+/*
+▬▬▬.◙.▬▬▬
+═▂▄▄▓▄▄▂
+◢◤ █▀▀████▄▄▄▄▄▄◢◤
+█▄ █ :) ██▀▀▀▀▀▀▀╬
+◥█████◤
+══╩══╩══
+▬▬▬. FUNÇÃO DRAG ==>(CARD) <=== .▬▬▬ 
+*/
+
 
 function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
     const card = document.querySelector(element)
@@ -24,7 +61,57 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
 
 
 
+/*
+_____Sexy?Sex
+____?Sexy?Sexy
+___y?Sexy?Sexy?
+___?Sexy?Sexy?S         <><><><> FUNÇÃO DROP - (dropzones) <><><><>
+___?Sexy?Sexy?S
+__?Sexy?Sexy?Se
+_?Sexy?Sexy?Se
+_?Sexy?Sexy?Se
+_?Sexy?Sexy?Sexy?
+?Sexy?Sexy?Sexy?Sexy
+?Sexy?Sexy?Sexy?Sexy?Se
+?Sexy?Sexy?Sexy?Sexy?Sex
+_?Sexy?__?Sexy?Sexy?Sex
+___?Sex____?Sexy?Sexy?
+___?Sex_____?Sexy?Sexy
+___?Sex_____?Sexy?Sexy
+____?Sex____?Sexy?Sexy
+_____?Se____?Sexy?Sex
+______?Se__?Sexy?Sexy
+_______?Sexy?Sexy?Sex
+________?Sexy?Sexy?sex
+_______?Sexy?Sexy?Sexy?Se
+_______?Sexy?Sexy?Sexy?Sexy?
+_______?Sexy?Sexy?Sexy?Sexy?Sexy
+_______?Sexy?Sexy?Sexy?Sexy?Sexy?S
+________?Sexy?Sexy____?Sexy?Sexy?se
+_________?Sexy?Se_______?Sexy?Sexy?
+_________?Sexy?Se_____?Sexy?Sexy?
+_________?Sexy?S____?Sexy?Sexy
+_________?Sexy?S_?Sexy?Sexy
+________?Sexy?Sexy?Sexy
+________?Sexy?Sexy?S
+________?Sexy?Sexy
+_______?Sexy?Se
+_______?Sexy?
+______?Sexy?
+______?Sexy?
+______?Sexy?
+______?Sexy
+______?Sexy
+_______?Sex
+_______?Sex
+_______?Sex
+______?Sexy
+______?Sexy
+_______Sexy
+_______ Sexy?
+________SexY 
 
+*/
 
 function Drop
     (
@@ -38,31 +125,24 @@ function Drop
         essentialFunctions = false
     ) {
 
-
-
+    const div = () => document.createElement('div')
     let dropzones = document.querySelectorAll(element)
     const _cards = document.querySelector(initialZone)
     const discard = document.querySelector(to_discard)
-
     const boxTags = document.querySelector(tags)
-    const div = () => document.createElement('div')
-
-
-
-
     const { addSan, removeSan } = essentialFunctions
+
 
     dropzones = Array.from(dropzones)
     dropzones.push(_cards)
     dropzones.push(discard)
 
 
-
     dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragenter', dragenter)
+        dropzone.addEventListener('dragover', dragover)
+        dropzone.addEventListener('dragleave', dragleave)
         if (dropzone !== _cards && dropzone !== discard) {
-            dropzone.addEventListener('dragenter', dragenter)
-            dropzone.addEventListener('dragover', dragover)
-            dropzone.addEventListener('dragleave', dragleave)
             if (!dropzone.hasAttribute('number_of_cards')) dropzone.setAttribute('number_of_cards', 0)
             else {
                 number_of_cards = Number.parseInt(dropzone.getAttribute('number_of_cards'))
@@ -74,6 +154,9 @@ function Drop
         }
 
     })
+
+
+    // FUNÇÕES DENTRO DO DROP(usadas nos eventos)
 
     function dragenter() {
         const cardBeingDragged = document.querySelector(is_draging)
@@ -90,12 +173,14 @@ function Drop
     }
 
     function dragover() {
+        this.classList.add('dropzone_in_focus')
     }
 
     function dragleave() {
         const cardBeingDragged = document.querySelector(is_draging)
         cardBeingDragged.style.display = 'none'
         if (this === _cards) cardBeingDragged.style.display = 'block'
+        this.classList.remove('dropzone_in_focus')
 
     }
 
@@ -104,6 +189,35 @@ function Drop
 
 }
 
+
+/* ──────▄▀▀═════════════▀▀▄
+───────█═══════════════════█
+──────█═════════════════════█
+─────█═══▄▄▄▄▄▄▄═══▄▄▄▄▄▄▄═══█
+────█═══█████████═█████████═══█
+────█══██▀────▀█████▀────▀██══█         ╔══════•ೋೋ•══════╗ 
+───██████──█▀█──███──█▀█──██████
+───██████──▀▀▀──███──▀▀▀──██████        FUNÇÕES AUXILIARES
+────█══▀█▄────▄██─██▄────▄█▀══█
+────█════▀█████▀───▀█████▀════█         ╚══════•ೋೋ•══════╝
+────█═════════════════════════█      ||
+────█═════════════════════════█    |||
+────█═══════█▀█▀█▀█▀█▀█═══════█  |||
+────█═══════▀▄───────▄▀═══════█
+───▐▓▓▌═══════▀▄█▄█▄▀═══════▐▓▓▌
+───▐▐▓▓▌▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▐▓▓▌▌
+───█══▐▓▄▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▄▓▌══█
+──█══▌═▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌═▐══█
+──█══█═▐▓▓▓▓▓▓▄▄▄▄▄▄▄▓▓▓▓▓▓▌═█══█
+──█══█═▐▓▓▓▓▓▓▐██▀██▌▓▓▓▓▓▓▌═█══█
+──█══█═▐▓▓▓▓▓▓▓▀▀▀▀▀▓▓▓▓▓▓▓▌═█══█
+──█══█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█══█
+─▄█══█▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌█══█▄
+─█████▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌─█████
+─██████▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌─████
+──▀█▀█──▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌───█▀█▀
+─────────▐▓▓▓▓▓▓▌▐▓▓▓▓▓▓▌
+──────────▐▓▓▓▓▌──▐▓▓▓▓▌ */
 
 
 
@@ -121,6 +235,8 @@ function addSan(dad = this, san = false) {
     }
 
 }
+//------------------------------------------ FIM
+
 function removeSan(dad = this, san = false) {
     if (san) {
         try {
@@ -133,6 +249,7 @@ function removeSan(dad = this, san = false) {
     }
 
 }
+//------------------------------------------ FIM
 
 const tag = (div, dad, formatLargeNumbers = false, dZone = this) => {
     const number_of_cards = dZone.getAttribute('number_of_cards')
@@ -151,6 +268,7 @@ const tag = (div, dad, formatLargeNumbers = false, dZone = this) => {
     addSan(dad, __tag)
     return __tag
 }
+//------------------------------------------ FIM
 
 const formatLargeNumbers = number => {
     stng_number = Number.parseInt(number).toString()
@@ -202,8 +320,52 @@ const formatLargeNumbers = number => {
 
     return stng_number
 }
+//------------------------------------------ FIM
 
 
+/*
+
+░░█▀░░░░░░░░░░░▀▀███████░░░░ 
+░░█▌░░░░░░░░░░░░░░░▀██████░░░ 
+░█▌░░░░░░░░░░░░░░░░███████▌░░ 
+░█░░░░░░░░░░░░░░░░░████████░░ 
+▐▌░░░░░░░░░░░░░░░░░▀██████▌░░ 
+░▌▄███▌░░░░▀████▄░░░░▀████▌░░ 
+▐▀▀▄█▄░▌░░░▄██▄▄▄▀░░░░████▄▄░ 
+▐░▀░░═▐░░░░░░══░░▀░░░░▐▀░▄▀▌▌ 
+▐░░░░░▌░░░░░░░░░░░░░░░▀░▀░░▌▌ 
+▐░░░▄▀░░░▀░▌░░░░░░░░░░░░▌█░▌▌ 
+░▌░░▀▀▄▄▀▀▄▌▌░░░░░░░░░░▐░▀▐▐░ 
+░▌░░▌░▄▄▄▄░░░▌░░░░░░░░▐░░▀▐░░ 
+░█░▐▄██████▄░▐░░░░░░░░█▀▄▄▀░░ 
+░▐░▌▌░░░░░░▀▀▄▐░░░░░░█▌░░░░░░ 
+░░█░░▄▀▀▀▀▄░▄═╝▄░░░▄▀░▌░░░░░░ 
+░░░▌▐░░░░░░▌░▀▀░░▄▀░░▐░░░░░░░ 
+░░░▀▄░░░░░░░░░▄▀▀░░░░█░░░░░░░ 
+░░░▄█▄▄▄▄▄▄▄▀▀░░░░░░░▌▌░░░░░░ 
+░░▄▀▌▀▌░░░░░░░░░░░░░▄▀▀▄░░░░░ 
+▄▀░░▌░▀▄░░░░░░░░░░▄▀░░▌░▀▄░░░ 
+░░░░▌█▄▄▀▄░░░░░░▄▀░░░░▌░░░▌▄▄ 
+░░░▄▐██████▄▄░▄▀░░▄▄▄▄▌░░░░▄░ 
+░░▄▌████████▄▄▄███████▌░░░░░▄ 
+░▄▀░██████████████████▌▀▄░░░░ 
+▀░░░█████▀▀░░░▀███████░░░▀▄░░ 
+░░░░▐█▀░░░▐░░░░░▀████▌░░░░▀▄░ 
+░░░░░░▌░░░▐░░░░▐░░▀▀█░░░░░░░▀ 
+░░░░░░▐░░░░▌░░░▐░░░░░▌░░░░░░░ 
+░╔╗║░╔═╗░═╦═░░░░░╔╗░░╔═╗░╦═╗░ 
+░║║║░║░║░░║░░░░░░╠╩╗░╠═╣░║░║░ 
+░║╚╝░╚═╝░░║░░░░░░╚═╝░║░║░╩═﻿
+
+┻┳|―-∩
+┳┻|　　ヽ
+┻┳|　●   |    
+┳┻|▼) _ノ
+┻┳|￣　)    CHAMADA DAS FUNÇÕES DRAG / DROP 
+┳ﾐ(￣  ／
+┻┳T
+
+*/
 
 
 Drag('#atual_card', false);
