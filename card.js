@@ -113,35 +113,31 @@ ________SexY
 
 */
 
-function Drop
-    (
-        object
-    ) {
-        add = object.add,
-        element = object.element,
-        _elementParent = object._elementParent,
-        initialZone = object.initialZone,
-        to_discard = object.to_discard ? object.to_discard: '#to_discard',
-        pageHtml = object.pageHtml,
-        classOver = object.classOver ? object.classOver: '#o_v_e_r',
-        is_draging = object.is_draging ? object.is_draging: '.is-draging',
-        tags = object.tags ? object.tags: '#tags',
-        essentialFunctions = object.essentialFunctions
-
-    const div = () => document.createElement('div')
-    const elementParent = document.querySelector(_elementParent)
-    let dropzones = document.querySelectorAll(element)
-    const _cards = document.querySelector(initialZone)
-    const discard = document.querySelector(to_discard)
-    const boxTags = document.querySelector(tags)
-    let boxtagsArray = document.querySelectorAll(tags)
-    boxtagsArray = Array.from(boxtagsArray)
+function Drop(object) {
+    // relaciono os itens do objeto a variáveis
+    add = object.add,
+    element = object.element,
+    _elementParent = object._elementParent,
+    initialZone = object.initialZone,
+    to_discard = object.to_discard ? object.to_discard : '#to_discard',
+    pageHtml = object.pageHtml,
+    classOver = object.classOver ? object.classOver : '#o_v_e_r',
+    is_draging = object.is_draging ? object.is_draging : '.is-draging',
+    tags = object.tags ? object.tags : '#tags',
+    essentialFunctions = object.essentialFunctions
 
 
-    const { addSan, removeSan } = essentialFunctions
-    dropzones = Array.from(dropzones)
+    const div = () => document.createElement('div') // cria um elemento html (div)
+    const elementParent = document.querySelector(_elementParent) // pega o elemento pai
+    let dropzones = document.querySelectorAll(element) // array com os elementos
+    const _cards = document.querySelector(initialZone) // pega local inicial do card
+    const discard = document.querySelector(to_discard) // pega zona para descarte
+    const boxTags = document.querySelector(tags) // box em que agrupa as tags
 
-    if (add) {
+    const { addSan, addElement } = essentialFunctions // extraio funções das quais preciso
+    dropzones = Array.from(dropzones) // transformo em array para poder modificar 
+
+    if (add) { // verifica se deve ser criado uma nova dropzona
 
         myParameters = {
             element: div,
@@ -425,11 +421,11 @@ let objectDrop = {
     classOver: 'over',
     is_draging: '.is-dragging',
     tags: "#tags",
-    essentialFunctions: { addSan, removeSan, tag }
+    essentialFunctions: { addSan, removeSan, tag, addElement }
 }
 
 
-Drag( '#atual_card', false );
-Drop( objectDrop )
+Drag('#atual_card', false);
+Drop(objectDrop)
 
 
