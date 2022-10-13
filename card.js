@@ -115,45 +115,63 @@ ________SexY
 
 function Drop
     (
-        element,
-        initialZone,
-        to_discard = "#to_discard",
-        pageHtml = false,
-        classOver = 'o_v_e_r',
-        is_draging = '.is-draging',
-        tags = '#tags',
-        essentialFunctions = false
+        object
     ) {
+        add = object.add,
+        element = object.element,
+        _elementParent = object._elementParent,
+        initialZone = object.initialZone,
+        to_discard = object.to_discard ? object.to_discard: '#to_discard',
+        pageHtml = object.pageHtml,
+        classOver = object.classOver ? object.classOver: '#o_v_e_r',
+        is_draging = object.is_draging ? object.is_draging: '.is-draging',
+        tags = object.tags ? object.tags: '#tags',
+        essentialFunctions = object.essentialFunctions
 
     const div = () => document.createElement('div')
+    const elementParent = document.querySelector(_elementParent)
     let dropzones = document.querySelectorAll(element)
     const _cards = document.querySelector(initialZone)
     const discard = document.querySelector(to_discard)
     const boxTags = document.querySelector(tags)
+    let boxtagsArray = document.querySelectorAll(tags)
+    boxtagsArray = Array.from(boxtagsArray)
+
+
     const { addSan, removeSan } = essentialFunctions
-
-
     dropzones = Array.from(dropzones)
+
+    if (add) {
+
+        myParameters = {
+            element: div,
+            dad: elementParent,
+            classes: 'dropzone_tags',
+            attribute: [['number_of_cards', 0]],
+        }
+
+        const dropzone = addElement(myParameters)
+        dropzones.push(dropzone)
+        // verifica se há attributo para contagem de cards
+        if (!dropzone.hasAttribute('number_of_cards')) dropzone.setAttribute('number_of_cards', 0)
+        // cria tag e adiciona no 'boxTags'
+        addSan(boxTags, tag(div, formatLargeNumbers, dropzone))
+    }
+
+
+    /* number_of_cards = Number.parseInt(dropzone.getAttribute('number_of_cards'))
+                dropzone.setAttribute('number_of_cards', number_of_cards + 1) */
     dropzones.push(_cards)
     dropzones.push(discard)
-
-
     dropzones.forEach(dropzone => {
         dropzone.addEventListener('dragenter', dragenter)
         dropzone.addEventListener('dragover', dragover)
         dropzone.addEventListener('dragleave', dragleave)
-        if (dropzone !== _cards && dropzone !== discard) {
-            if (!dropzone.hasAttribute('number_of_cards')) dropzone.setAttribute('number_of_cards', 0)
-            else {
-                number_of_cards = Number.parseInt(dropzone.getAttribute('number_of_cards'))
-                dropzone.setAttribute('number_of_cards', number_of_cards + 1)
-            }
-
-            tag(div, boxTags, formatLargeNumbers, dropzone)
-
-        }
-
     })
+
+
+
+
 
 
     // FUNÇÕES DENTRO DO DROP(usadas nos eventos)
@@ -251,7 +269,7 @@ function removeSan(dad = this, san = false) {
 }
 //------------------------------------------ FIM
 
-const tag = (div, dad, formatLargeNumbers = false, dZone = this) => {
+const tag = (div, formatLargeNumbers = false, dZone = this) => {
     const number_of_cards = dZone.getAttribute('number_of_cards')
     const __tag = div()
     const title = div()
@@ -265,7 +283,6 @@ const tag = (div, dad, formatLargeNumbers = false, dZone = this) => {
 
     addSan(__tag, title)
     addSan(__tag, length)
-    addSan(dad, __tag)
     return __tag
 }
 //------------------------------------------ FIM
@@ -315,12 +332,44 @@ const formatLargeNumbers = number => {
             break
 
     }
-
-
-
     return stng_number
 }
 //------------------------------------------ FIM
+
+const addElement = (
+    object
+) => {
+    _element = object.element
+    dad = object.dad
+    id = object.id
+    classes = object.classes
+    attribute = object.attribute
+    value = object.value
+    typeof _element == 'function' ? element = _element() : element = _element
+    _return = !!object._return ? object._return : element
+
+
+
+
+    // tenta adicionar attributos ao elemento
+    try {
+        if (id) element.setAttribute('id', id)
+        if (classes) typeof classes == 'string' ? element.classList.add(classes) : classes.forEach(c => element.classList.add(c))
+        if (attribute) attribute.forEach(attr => element.setAttribute(attr[0], attr[1]))
+        if (value) element.setAttribute('value', value)
+    } catch (err) {
+        console.log(`Could not configure one/some of the following attributes: id; class; attribute; value <> >>> ${err}`)
+    }
+    //tenta adicionar dentro do elemento 'dad'
+    try {
+        dad.append(element)
+
+    } catch (err) {
+        console.log(`Could not add element inside parent <> ${err}`)
+    }
+
+    return _return
+}
 
 
 /*
@@ -367,17 +416,20 @@ const formatLargeNumbers = number => {
 
 */
 
+let objectDrop = {
+    add: true,
+    element: ".dropzone_tags",
+    _elementParent: "#dropzones",
+    initialZone: '.cards',
+    to_discard: "#to_discard",
+    classOver: 'over',
+    is_draging: '.is-dragging',
+    tags: "#tags",
+    essentialFunctions: { addSan, removeSan, tag }
+}
 
-Drag('#atual_card', false);
+
+Drag( '#atual_card', false );
+Drop( objectDrop )
 
 
-Drop(
-    ".dropzone_tags",
-    '.cards',
-    "#to_discard",
-    false,
-    'over',
-    '.is-dragging',
-    "#tags",
-    { addSan, removeSan, tag }
-)
