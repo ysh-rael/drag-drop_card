@@ -141,12 +141,10 @@ function Drop(object) {
         const corresponding_dropZone = ['corresponding_dropZone', dropzones.length]
         function addEventInDropzone(elem) {
             elem.addEventListener('dragenter', dragenter)
-            elem.addEventListener('dragover', dragover)
+            elem.addEventListener('dragover', e => dragover(e), false)
             elem.addEventListener('dragleave', dragleave)
-            elem.addEventListener('drop', (e) => {
-                e.preventDefault()
-                alert('kk')
-            })
+            elem.addEventListener("drop", (e) => drop(e));
+
 
             return elem
         }
@@ -211,11 +209,11 @@ function Drop(object) {
             }
         }
 
+        this.classList.add('dropzone_in_focus')
     }
 
-    function dragover() {
-        this.classList.add('dropzone_in_focus')
-
+    function dragover(e) {
+        e.preventDefault()
     }
 
     function dragleave() {
@@ -226,6 +224,20 @@ function Drop(object) {
 
         this.classList.remove('dropzone_in_focus')
 
+    }
+
+    function drop(e) {
+        e.preventDefault()
+        if(e.target == _cards) {
+            console.log('ysysysyys')
+
+        } else {
+            if(e.target == discard) {
+
+            }
+            // se for os dropzones
+            console.log(e.target)
+        }
     }
 
 
