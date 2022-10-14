@@ -116,15 +116,15 @@ ________SexY
 function Drop(object) {
     // relaciono os itens do objeto a variáveis
     add = object.add,
-    element = object.element,
-    _elementParent = object._elementParent,
-    initialZone = object.initialZone,
-    to_discard = object.to_discard ? object.to_discard : '#to_discard',
-    pageHtml = object.pageHtml,
-    classOver = object.classOver ? object.classOver : '#o_v_e_r',
-    is_draging = object.is_draging ? object.is_draging : '.is-draging',
-    tags = object.tags ? object.tags : '#tags',
-    essentialFunctions = object.essentialFunctions
+        element = object.element,
+        _elementParent = object._elementParent,
+        initialZone = object.initialZone,
+        to_discard = object.to_discard ? object.to_discard : '#to_discard',
+        pageHtml = object.pageHtml,
+        classOver = object.classOver ? object.classOver : '#o_v_e_r',
+        is_draging = object.is_draging ? object.is_draging : '.is-draging',
+        tags = object.tags ? object.tags : '#tags',
+        essentialFunctions = object.essentialFunctions
 
 
     const div = () => document.createElement('div') // cria um elemento html (div)
@@ -138,32 +138,48 @@ function Drop(object) {
     dropzones = Array.from(dropzones) // transformo em array para poder modificar 
 
     if (add) { // verifica se deve ser criado uma nova dropzona
+        const corresponding_dropZone = ['corresponding_dropZone', dropzones.length]
+        function addEventInDropzone(elem) {
+            elem.addEventListener('dragenter', dragenter)
+            elem.addEventListener('dragover', dragover)
+            elem.addEventListener('dragleave', dragleave)
+            elem.addEventListener('drop', (e) => {
+                e.preventDefault()
+                alert('kk')
+            })
+
+            return elem
+        }
 
         myParameters = {
             element: div,
             dad: elementParent,
             classes: 'dropzone_tags',
-            attribute: [['number_of_cards', 0]],
+            attribute: [['number_of_cards', 0], [corresponding_dropZone[0], corresponding_dropZone[1]]],
         }
-
         const dropzone = addElement(myParameters)
         dropzones.push(dropzone)
         // verifica se há attributo para contagem de cards
         if (!dropzone.hasAttribute('number_of_cards')) dropzone.setAttribute('number_of_cards', 0)
         // cria tag e adiciona no 'boxTags'
-        addSan(boxTags, tag(div, formatLargeNumbers, dropzone))
+        const newTag = tag(div, formatLargeNumbers, dropzone, corresponding_dropZone)
+        addSan(boxTags, newTag)
+        /* number_of_cards = Number.parseInt(dropzone.getAttribute('number_of_cards'))
+                    dropzone.setAttribute('number_of_cards', number_of_cards + 1) */
+        dropzones.push(_cards)
+        dropzones.push(discard)
+
+        addEventInDropzone(dropzone)
+
+        dropzones.splice(dropzones.indexOf(_cards), 1);
+        dropzones.splice(dropzones.indexOf(discard), 1);
     }
+    addEventInDropzone(_cards)
+    addEventInDropzone(discard)
 
 
-    /* number_of_cards = Number.parseInt(dropzone.getAttribute('number_of_cards'))
-                dropzone.setAttribute('number_of_cards', number_of_cards + 1) */
-    dropzones.push(_cards)
-    dropzones.push(discard)
-    dropzones.forEach(dropzone => {
-        dropzone.addEventListener('dragenter', dragenter)
-        dropzone.addEventListener('dragover', dragover)
-        dropzone.addEventListener('dragleave', dragleave)
-    })
+
+
 
 
 
@@ -171,6 +187,7 @@ function Drop(object) {
 
 
     // FUNÇÕES DENTRO DO DROP(usadas nos eventos)
+
 
     function dragenter() {
         const cardBeingDragged = document.querySelector(is_draging)
@@ -182,18 +199,31 @@ function Drop(object) {
             cardBeingDragged.style.display = 'none'
             this.classList.add(classOver)
             addSan(this, cardBeingDragged)
+            if (this !== discard) {
+                // array_boxTags = Array.from(document.querySelectorAll('.tag'))
+                // array_boxTags[attr_dropzone] -> pega tag correspodente
+                number_of_cards = Number.parseInt(this.getAttribute('number_of_cards'))
+
+
+                this.setAttribute('number_of_cards', number_of_cards + 1)
+                const attr_dropzone = this.getAttribute('corresponding_dropZone')
+
+            }
         }
 
     }
 
     function dragover() {
         this.classList.add('dropzone_in_focus')
+
     }
 
     function dragleave() {
         const cardBeingDragged = document.querySelector(is_draging)
         cardBeingDragged.style.display = 'none'
-        if (this === _cards) cardBeingDragged.style.display = 'block'
+        if (this === _cards) { cardBeingDragged.style.display = 'block' }
+
+
         this.classList.remove('dropzone_in_focus')
 
     }
@@ -265,14 +295,17 @@ function removeSan(dad = this, san = false) {
 }
 //------------------------------------------ FIM
 
-const tag = (div, formatLargeNumbers = false, dZone = this) => {
+const tag = (div, formatLargeNumbers = false, dZone = this, attr = false) => {
     const number_of_cards = dZone.getAttribute('number_of_cards')
     const __tag = div()
     const title = div()
     const length = div()
+
     title.classList.add('title_tag')
     length.classList.add('length_tag')
     __tag.classList.add('tag')
+    if (attr) __tag.setAttribute(attr[0], attr[1])
+
     title.innerHTML = "<nobr>00_título_00</nobr>"
     length.innerText = formatLargeNumbers ? formatLargeNumbers(number_of_cards) : number_of_cards
 
@@ -426,6 +459,8 @@ let objectDrop = {
 
 
 Drag('#atual_card', false);
+Drop(objectDrop)
+Drop(objectDrop)
 Drop(objectDrop)
 
 
