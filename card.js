@@ -22,6 +22,26 @@
 */
 
 
+// CREATE CARD
+
+function newCard(parameter, func = false, _tagHtml = 'div') {
+    elem = parameter.elem
+    color = parameter.color
+
+
+    console.log()
+    if(color) elem.style.backgroundColor = color
+
+    if (!!func) {
+        try {
+            func.forEach(f => f())
+        } catch (err) {
+            console.log("incapaz de executar funçõe chamadas dentro do 'createCard' <> ", err)
+        }
+    }
+}
+
+
 
 
 
@@ -56,7 +76,7 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
         // this = card
         this.classList.remove('is-dragging')
     }
-
+    return card
 }
 
 
@@ -113,7 +133,7 @@ ________SexY
 
 */
 
-function Drop(object) {
+function Drop(object, init = false) {
     // relaciono os itens do objeto a variáveis
     add = object.add,
         element = object.element,
@@ -137,23 +157,31 @@ function Drop(object) {
     const { addSan, addElement } = essentialFunctions // extraio funções das quais preciso
     dropzones = Array.from(dropzones) // transformo em array para poder modificar 
 
+    function addEventInDropzone(elem) {
+        elem.addEventListener('dragenter', dragenter)
+        elem.addEventListener('dragover', e => dragover(e), false)
+        elem.addEventListener('dragleave', dragleave)
+        elem.addEventListener("drop", (e) => drop(e));
+
+
+        return elem
+    }
+
+
+    // verifico se é a chamada inicial
+    if(init) {
+        addEventInDropzone(_cards)
+        addEventInDropzone(discard)
+    }
+
     if (add) { // verifica se deve ser criado uma nova dropzona
         const corresponding_dropZone = ['corresponding_dropZone', dropzones.length]
-        function addEventInDropzone(elem) {
-            elem.addEventListener('dragenter', dragenter)
-            elem.addEventListener('dragover', e => dragover(e), false)
-            elem.addEventListener('dragleave', dragleave)
-            elem.addEventListener("drop", (e) => drop(e));
-
-
-            return elem
-        }
 
         myParameters = {
             element: div,
             dad: elementParent,
             classes: 'dropzone_tags',
-            attribute: [['number_of_cards', 0], [corresponding_dropZone[0], corresponding_dropZone[1]]],
+            attribute: [{key: 'number_of_cards', value: 0}, {key: corresponding_dropZone[0], value: corresponding_dropZone[1]}],
         }
         const dropzone = addElement(myParameters)
         dropzones.push(dropzone)
@@ -172,8 +200,7 @@ function Drop(object) {
         dropzones.splice(dropzones.indexOf(_cards), 1);
         dropzones.splice(dropzones.indexOf(discard), 1);
     }
-    addEventInDropzone(_cards)
-    addEventInDropzone(discard)
+   
 
 
 
@@ -218,7 +245,7 @@ function Drop(object) {
 
     function dragleave() {
         const cardBeingDragged = document.querySelector(is_draging)
-        cardBeingDragged.style.display = 'none'
+        // cardBeingDragged.style.display = 'none'
         if (this === _cards) { cardBeingDragged.style.display = 'block' }
 
 
@@ -228,15 +255,19 @@ function Drop(object) {
 
     function drop(e) {
         e.preventDefault()
-        if(e.target == _cards) {
-            console.log('ysysysyys')
+        if (e.target == _cards) {
+            console.log('_cardzone')
 
         } else {
-            if(e.target == discard) {
-
+            if (e.target == discard) {
+                console.log("deleteZone")
+                
             }
             // se for os dropzones
-            console.log(e.target)
+            else {
+                
+                console.log("dropzone")
+            }
         }
     }
 
@@ -377,26 +408,25 @@ const formatLargeNumbers = number => {
 }
 //------------------------------------------ FIM
 
-const addElement = (
-    object
-) => {
+const addElement = (object) => {
     _element = object.element
     dad = object.dad
     id = object.id
     classes = object.classes
     attribute = object.attribute
     value = object.value
+
+    // verifica se 'element' é uma função para criação do elemento ou uma referencia a um existente
     typeof _element == 'function' ? element = _element() : element = _element
-    _return = !!object._return ? object._return : element
 
-
-
+    // retorna por padrão o próprio elemento
+    _return = !!object._return ? object._return : element 
 
     // tenta adicionar attributos ao elemento
     try {
         if (id) element.setAttribute('id', id)
         if (classes) typeof classes == 'string' ? element.classList.add(classes) : classes.forEach(c => element.classList.add(c))
-        if (attribute) attribute.forEach(attr => element.setAttribute(attr[0], attr[1]))
+        if (attribute) attribute.forEach(attr => element.setAttribute(attr.key, attr.value))
         if (value) element.setAttribute('value', value)
     } catch (err) {
         console.log(`Could not configure one/some of the following attributes: id; class; attribute; value <> >>> ${err}`)
@@ -410,6 +440,18 @@ const addElement = (
     }
 
     return _return
+}
+//------------------------------------------ FIM
+
+const random = (type = 'color') => {
+    switch(type) {
+        case 'color' : {
+            r = parseInt(Math.random() * 255)
+            g = parseInt(Math.random() * 255)
+            b = parseInt(Math.random() * 255)
+            return `rgb(${r},${g},${b})`
+        }
+    }
 }
 
 
@@ -469,9 +511,22 @@ let objectDrop = {
     essentialFunctions: { addSan, removeSan, tag, addElement }
 }
 
+const objCard = {
+    element: document.createElement('div'),
+    dad: document.querySelector('.cards'),
+    id: 'atual_card',
+    classes: 'card',
+    attribute: [
+        { key: 'draggable', value: true },
+        { key: 'droppable', value: true }
+    ]
+}
 
-Drag('#atual_card', false);
-Drop(objectDrop)
+
+
+newCard({ elem: addElement(objCard), color: random('color')})
+Drag('#'+objCard.id, false);
+Drop(objectDrop, true)
 Drop(objectDrop)
 Drop(objectDrop)
 
