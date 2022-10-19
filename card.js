@@ -154,7 +154,7 @@ function Drop(object, init = false) {
     const discard = document.querySelector(to_discard) // pega zona para descarte
     const boxTags = document.querySelector(tags) // box em que agrupa as tags
 
-    const { addSan, addElement } = essentialFunctions // extraio funções das quais preciso
+    const { addSan, addElement, random } = essentialFunctions // extraio funções das quais preciso
     dropzones = Array.from(dropzones) // transformo em array para poder modificar 
 
     function addEventInDropzone(elem) {
@@ -217,6 +217,7 @@ function Drop(object, init = false) {
     function dragenter() {
         const cardBeingDragged = document.querySelector(is_draging)
         if (this == _cards) {
+            cardBeingDragged.style.display = 'block'
             const cards = document.querySelector(initialZone)
             cards.insertAdjacentElement('afterbegin', cardBeingDragged)
 
@@ -234,6 +235,7 @@ function Drop(object, init = false) {
                 const attr_dropzone = this.getAttribute('corresponding_dropZone')
 
             }
+
         }
 
         this.classList.add('dropzone_in_focus')
@@ -245,7 +247,6 @@ function Drop(object, init = false) {
 
     function dragleave() {
         const cardBeingDragged = document.querySelector(is_draging)
-        // cardBeingDragged.style.display = 'none'
         if (this === _cards) { cardBeingDragged.style.display = 'block' }
 
 
@@ -259,14 +260,20 @@ function Drop(object, init = false) {
             console.log('_cardzone')
 
         } else {
+        const cardBeingDragged = document.querySelector(is_draging)
+            cardBeingDragged.style.display = 'block'
+            
+
+            // cria e adiciona novo card
+            addSan(boxTags, newCard({ elem: addElement(objCard), color: random('color')}))
+            console.log(e.target)
             if (e.target == discard) {
                 console.log("deleteZone")
                 
             }
             // se for os dropzones
             else {
-                
-                console.log("dropzone")
+                e.target.classList.remove('dropzone_in_focus')
             }
         }
     }
@@ -508,7 +515,7 @@ let objectDrop = {
     classOver: 'over',
     is_draging: '.is-dragging',
     tags: "#tags",
-    essentialFunctions: { addSan, removeSan, tag, addElement }
+    essentialFunctions: { addSan, removeSan, tag, addElement, random }
 }
 
 const objCard = {
