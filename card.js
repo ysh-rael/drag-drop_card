@@ -226,14 +226,10 @@ function Drop(object, init = false) {
             this.classList.add(classOver)
             addSan(this, cardBeingDragged)
             if (this !== discard) {
-                // array_boxTags = Array.from(document.querySelectorAll('.tag'))
-                // array_boxTags[attr_dropzone] -> pega tag correspodente
                 number_of_cards = Number.parseInt(this.getAttribute('number_of_cards'))
 
 
                 this.setAttribute('number_of_cards', number_of_cards + 1)
-                const attr_dropzone = this.getAttribute('corresponding_dropZone')
-
             }
 
         }
@@ -248,8 +244,6 @@ function Drop(object, init = false) {
     function dragleave() {
         const cardBeingDragged = document.querySelector(is_draging)
         if (this === _cards) { cardBeingDragged.style.display = 'block' }
-
-
         this.classList.remove('dropzone_in_focus')
 
     }
@@ -266,7 +260,6 @@ function Drop(object, init = false) {
 
             // cria e adiciona novo card
             addSan(boxTags, newCard({ elem: addElement(objCard), color: random('color')}))
-            console.log(e.target)
             if (e.target == discard) {
                 console.log("deleteZone")
                 
@@ -274,6 +267,11 @@ function Drop(object, init = false) {
             // se for os dropzones
             else {
                 e.target.classList.remove('dropzone_in_focus')
+                const attr_dropzone = e.target.getAttribute('corresponding_dropZone')
+                array_boxTags = Array.from(document.querySelectorAll('.tag'))
+                number_of_cards = Number.parseInt(e.target.getAttribute('number_of_cards'))
+                // -> pega tag correspodente e atualizar valor
+                 array_boxTags[attr_dropzone].children[1].innerHTML = number_of_cards
             }
         }
     }
@@ -535,6 +533,6 @@ newCard({ elem: addElement(objCard), color: random('color')})
 Drag('#'+objCard.id, false);
 Drop(objectDrop, true)
 Drop(objectDrop)
-Drop(objectDrop)
+
 
 
