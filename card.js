@@ -271,7 +271,7 @@ function Drop(object, init = false) {
                 array_boxTags = Array.from(document.querySelectorAll('.tag'))
                 number_of_cards = Number.parseInt(e.target.getAttribute('number_of_cards'))
                 // -> pega tag correspodente e atualizar valor
-                 array_boxTags[attr_dropzone].children[1].innerHTML = number_of_cards
+                 array_boxTags[attr_dropzone].children[1].innerHTML = formatLargeNumbers(number_of_cards)
             }
         }
     }
