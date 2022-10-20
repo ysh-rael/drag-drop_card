@@ -30,7 +30,7 @@ function newCard(parameter, func = false, _tagHtml = 'div') {
 
 
     console.log()
-    if(color) elem.style.backgroundColor = color
+    if (color) elem.style.backgroundColor = color
 
     if (!!func) {
         try {
@@ -66,12 +66,13 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
     card.addEventListener('dragend', dragend)
 
     function dragstart() {
-        // dropzones.forEach(dropzone => dropzone.classList.add('highlight'))
-
+        // dropzones.forEach(dropzone => dropzone.classList.add('highlight')) """ para dar um estilo a todas as dropzones """
+        
+        // this = card
         this.classList.add('is-dragging')
     }
     function dragend() {
-        // dropzones.forEach(dropzone => dropzone.classList.remove('highlight'))
+        // dropzones.forEach(dropzone => dropzone.classList.remove('highlight')) 
 
         // this = card
         this.classList.remove('is-dragging')
@@ -144,6 +145,8 @@ function Drop(object, init = false) {
         classOver = object.classOver ? object.classOver : '#o_v_e_r',
         is_draging = object.is_draging ? object.is_draging : '.is-draging',
         tags = object.tags ? object.tags : '#tags',
+        title_tag = object.title_tag ? object.title_tag : 'desconhecido',
+
         essentialFunctions = object.essentialFunctions
 
 
@@ -169,7 +172,7 @@ function Drop(object, init = false) {
 
 
     // verifico se é a chamada inicial
-    if(init) {
+    if (init) {
         addEventInDropzone(_cards)
         addEventInDropzone(discard)
     }
@@ -181,14 +184,14 @@ function Drop(object, init = false) {
             element: div,
             dad: elementParent,
             classes: 'dropzone_tags',
-            attribute: [{key: 'number_of_cards', value: 0}, {key: corresponding_dropZone[0], value: corresponding_dropZone[1]}],
+            attribute: [{ key: 'number_of_cards', value: 0 }, { key: corresponding_dropZone[0], value: corresponding_dropZone[1] }],
         }
         const dropzone = addElement(myParameters)
         dropzones.push(dropzone)
         // verifica se há attributo para contagem de cards
         if (!dropzone.hasAttribute('number_of_cards')) dropzone.setAttribute('number_of_cards', 0)
         // cria tag e adiciona no 'boxTags'
-        const newTag = tag(div, formatLargeNumbers, dropzone, corresponding_dropZone)
+        const newTag = tag(div, formatLargeNumbers, dropzone, corresponding_dropZone, title_tag)
         addSan(boxTags, newTag)
         /* number_of_cards = Number.parseInt(dropzone.getAttribute('number_of_cards'))
                     dropzone.setAttribute('number_of_cards', number_of_cards + 1) */
@@ -200,7 +203,7 @@ function Drop(object, init = false) {
         dropzones.splice(dropzones.indexOf(_cards), 1);
         dropzones.splice(dropzones.indexOf(discard), 1);
     }
-   
+
 
 
 
@@ -215,25 +218,15 @@ function Drop(object, init = false) {
 
 
     function dragenter() {
-        const cardBeingDragged = document.querySelector(is_draging)
         if (this == _cards) {
-            cardBeingDragged.style.display = 'block'
             const cards = document.querySelector(initialZone)
-            cards.insertAdjacentElement('afterbegin', cardBeingDragged)
 
         } else {
-            cardBeingDragged.style.display = 'none'
             this.classList.add(classOver)
-            addSan(this, cardBeingDragged)
             if (this !== discard) {
-                number_of_cards = Number.parseInt(this.getAttribute('number_of_cards'))
-
-
-                this.setAttribute('number_of_cards', number_of_cards + 1)
+                
             }
-
         }
-
         this.classList.add('dropzone_in_focus')
     }
 
@@ -242,10 +235,7 @@ function Drop(object, init = false) {
     }
 
     function dragleave() {
-        const cardBeingDragged = document.querySelector(is_draging)
-        if (this === _cards) { cardBeingDragged.style.display = 'block' }
         this.classList.remove('dropzone_in_focus')
-
     }
 
     function drop(e) {
@@ -254,24 +244,30 @@ function Drop(object, init = false) {
             console.log('_cardzone')
 
         } else {
-        const cardBeingDragged = document.querySelector(is_draging)
-            cardBeingDragged.style.display = 'block'
-            
 
             // cria e adiciona novo card
-            addSan(boxTags, newCard({ elem: addElement(objCard), color: random('color')}))
+            _newCard = newCard({ elem: addElement(objCard), color: random('color') })
+            addSan(boxTags, _newCard)
+
+            // se for área de discarte
             if (e.target == discard) {
                 console.log("deleteZone")
-                
             }
             // se for os dropzones
             else {
                 e.target.classList.remove('dropzone_in_focus')
                 const attr_dropzone = e.target.getAttribute('corresponding_dropZone')
-                array_boxTags = Array.from(document.querySelectorAll('.tag'))
-                number_of_cards = Number.parseInt(e.target.getAttribute('number_of_cards'))
+                _number_of_cards = () => Number.parseInt(e.target.getAttribute('number_of_cards'))
+
+               
+
+                //tags
+                array_boxTags = Array.from(document.querySelectorAll('.tag')) // transforma em array para ser possível pecorrer
+                e.target.setAttribute('number_of_cards', _number_of_cards() + 1)
+                number_of_cards = _number_of_cards()
+
                 // -> pega tag correspodente e atualizar valor
-                 array_boxTags[attr_dropzone].children[1].innerHTML = formatLargeNumbers(number_of_cards)
+                array_boxTags[attr_dropzone].children[1].innerHTML = formatLargeNumbers(number_of_cards)
             }
         }
     }
@@ -343,7 +339,7 @@ function removeSan(dad = this, san = false) {
 }
 //------------------------------------------ FIM
 
-const tag = (div, formatLargeNumbers = false, dZone = this, attr = false) => {
+const tag = (div, formatLargeNumbers = false, dZone = this, attr = false, title_tag = 'sem nome') => {
     const number_of_cards = dZone.getAttribute('number_of_cards')
     const __tag = div()
     const title = div()
@@ -354,7 +350,7 @@ const tag = (div, formatLargeNumbers = false, dZone = this, attr = false) => {
     __tag.classList.add('tag')
     if (attr) __tag.setAttribute(attr[0], attr[1])
 
-    title.innerHTML = "<nobr>00_título_00</nobr>"
+    title.innerHTML = `<nobr>${title_tag}</nobr>`
     length.innerText = formatLargeNumbers ? formatLargeNumbers(number_of_cards) : number_of_cards
 
 
@@ -425,7 +421,7 @@ const addElement = (object) => {
     typeof _element == 'function' ? element = _element() : element = _element
 
     // retorna por padrão o próprio elemento
-    _return = !!object._return ? object._return : element 
+    _return = !!object._return ? object._return : element
 
     // tenta adicionar attributos ao elemento
     try {
@@ -449,8 +445,8 @@ const addElement = (object) => {
 //------------------------------------------ FIM
 
 const random = (type = 'color') => {
-    switch(type) {
-        case 'color' : {
+    switch (type) {
+        case 'color': {
             r = parseInt(Math.random() * 255)
             g = parseInt(Math.random() * 255)
             b = parseInt(Math.random() * 255)
@@ -513,6 +509,7 @@ let objectDrop = {
     classOver: 'over',
     is_draging: '.is-dragging',
     tags: "#tags",
+    title_tag: "Sem nome",
     essentialFunctions: { addSan, removeSan, tag, addElement, random }
 }
 
@@ -529,9 +526,10 @@ const objCard = {
 
 
 
-newCard({ elem: addElement(objCard), color: random('color')})
-Drag('#'+objCard.id, false);
+newCard({ elem: addElement(objCard), color: random('color') })
+Drag('#' + objCard.id, false);
 Drop(objectDrop, true)
+Drop(objectDrop)
 Drop(objectDrop)
 
 
