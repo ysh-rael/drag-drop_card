@@ -710,18 +710,20 @@ margin: auto;
 
     }
     #section_cards {
-        max-height: 45%;
+        max-height: 42%;
         min-height: 135px;
         justify-content: flex-end;
         align-items: flex-end;
         border-top: 2px solid rgb(45, 45, 45);
         margin-top: 1px;
         border-radius: 0;
-        background-color: red;
         
     }
     .to_rigth > section {
         width: 100%;
+    }
+    .to_rigth {
+        height: 58%;
     }
 
     .cards {
@@ -729,10 +731,6 @@ margin: auto;
         display: flex;
         justify-content: center;
         align-items: center;
-    
-
-        background-color: blue;
-
 
     }
 
