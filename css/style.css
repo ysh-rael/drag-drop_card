@@ -718,6 +718,9 @@ margin: auto;
         border-radius: 0;
         
     }
+    .to_rigth > section {
+        width: 100%;
+    }
 
     .cards {
         margin: 0 auto auto 0;
