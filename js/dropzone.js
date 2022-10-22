@@ -87,7 +87,7 @@ function Drop(init = false , object) {
 
             // se for área de discarte
             if (e.target == discard) {
-               /*  console.log("deleteZone") */
+                e.target.classList.remove('to_discard_in_Focus')
             } else { // se for os dropzones
                 e.target.classList.remove('dropzone_in_focus') // remove classe responsável pelo estilo de focu.
                 const attr_dropzone = e.target.getAttribute('corresponding_dropZone') //pega  attributo que liga dropzona a tag
