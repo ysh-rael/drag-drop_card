@@ -63,11 +63,13 @@ body {
 main {
     justify-content: space-between;
 }
+aside {
+    overflow-x: hidden;
+}
 
 .cards {
     width: 100%;
     height: 100%;
-
 }
 #atual_card {
 margin: auto;
