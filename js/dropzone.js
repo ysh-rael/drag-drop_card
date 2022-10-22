@@ -1,15 +1,16 @@
-function Drop(object, init = false) {
+function Drop(init = false , object) {
     // relaciono os itens do objeto a variáveis
     add = object.add,
         element = object.element,
         _elementParent = object._elementParent,
         initialZone = object.initialZone,
-        to_discard = object.to_discard ? object.to_discard : '#to_discard',
+        to_discard = object.to_discard ? object.to_discard : '.to_discard',
         pageHtml = object.pageHtml,
         classOver = object.classOver ? object.classOver : '#o_v_e_r',
         is_draging = object.is_draging ? object.is_draging : '.is-draging',
         tags = object.tags ? object.tags : '#tags',
         title_tag = object.title_tag ? object.title_tag : 'desconhecido',
+        color = object.color
         essentialFunctions = object.essentialFunctions
 
     const { addSan, addElement, random } = essentialFunctions // extraio funções das quais preciso
@@ -45,6 +46,7 @@ function Drop(object, init = false) {
             attribute: [{ key: 'number_of_cards', value: 0 }, { key: corresponding_dropZone[0], value: corresponding_dropZone[1] }],
         }
         const dropzone = addElement(myParameters) // crio um elemento (uma dropzona)
+        dropzone.style.background = color
         dropzones.push(dropzone)
 
         // verifica se há atributo para contagem de cards
@@ -52,6 +54,7 @@ function Drop(object, init = false) {
 
         // cria tag e adiciona no 'boxTags'
         const newTag = tag(div, formatLargeNumbers, dropzone, corresponding_dropZone, title_tag)
+        newTag.style.backgroundColor = color
         addSan(boxTags, newTag)
 
         addEventInDropzone(dropzone)
@@ -61,9 +64,9 @@ function Drop(object, init = false) {
     // FUNÇÕES DENTRO DO DROP(usadas nos eventos)
     function dragenter() {
             this.classList.add(classOver)
-            if (this !== discard) { } // se estiver entrado na dropzona do discarte
-        
-        this.classList.add('dropzone_in_focus') // ao entar da dropzona, add nela a classe responsável pelo estilo de foco ( executa em todos os casos )
+            this === discard ? this.classList.add('to_discard_in_Focus') :  this.classList.add('dropzone_in_focus') // ao entar da dropzona, add nela a classe responsável pelo estilo de foco
+               
+            
     }
 
     function dragover(e) {
@@ -71,7 +74,7 @@ function Drop(object, init = false) {
     }
 
     function dragleave() {
-        this.classList.remove('dropzone_in_focus') // ao sair da dropzona, remove dela a classe responsável pelo estilo de foco
+        this === discard ? this.classList.remove('to_discard_in_Focus') : this.classList.remove('dropzone_in_focus') // ao sair da dropzona, remove dela a classe responsável pelo estilo de foco
     }
 
     function drop(e) {

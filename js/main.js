@@ -1,9 +1,9 @@
 let objectDrop = {
-    add: true,
+    add: false,
     element: ".dropzone_tags",
     _elementParent: "#dropzones",
     initialZone: '.cards',
-    to_discard: "#to_discard",
+    to_discard: ".to_discard",
     classOver: 'over',
     is_draging: '.is-dragging',
     tags: "#tags",
@@ -26,6 +26,4 @@ const objCard = {
 
 newCard({ elem: addElement(objCard), color: random('color') })
 Drag('#' + objCard.id, false);
-Drop(objectDrop, true)
-Drop(objectDrop)
-Drop(objectDrop)
+Drop(true, objectDrop)
