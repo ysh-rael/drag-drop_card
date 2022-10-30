@@ -25,6 +25,15 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
 // CARD
     card.addEventListener('dragstart', dragstart)
     card.addEventListener('dragend', dragend)
+    card.addEventListener('touchmove', function (e) {
+        const touchLocation = e.targetTouches[0];
+        const halfWidthOfCard = parseInt(this.offsetWidth / 2)
+        const halfHeightOfCard = parseInt(this.offsetHeight - this.offsetHeight/5)
+        this.style.position = 'absolute'
+        this.style.marginLeft = touchLocation.pageX - halfWidthOfCard + 'px';
+        this.style.marginTop = touchLocation.pageY - halfHeightOfCard + 'px';
+
+    })
 
     function dragstart() {
         // dropzones.forEach(dropzone => dropzone.classList.add('highlight')) """ para dar um estilo a todas as dropzones """
