@@ -22,6 +22,8 @@ const objCard = {
     ]
 }
 
+let dropzoneMeasurements = []
+
 
 
 newCard({ elem: addElement(objCard), color: random('color') })

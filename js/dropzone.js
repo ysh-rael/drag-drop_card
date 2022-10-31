@@ -1,4 +1,4 @@
-function Drop(init = false , object) {
+function Drop(init = false, object) {
     // relaciono os itens do objeto a variáveis
     add = object.add,
         element = object.element,
@@ -11,7 +11,7 @@ function Drop(init = false , object) {
         tags = object.tags ? object.tags : '#tags',
         title_tag = object.title_tag ? object.title_tag : 'desconhecido',
         color = object.color
-        essentialFunctions = object.essentialFunctions
+    essentialFunctions = object.essentialFunctions
 
     const { addSan, addElement, random } = essentialFunctions // extraio funções das quais preciso
 
@@ -23,12 +23,24 @@ function Drop(init = false , object) {
     const boxTags = document.querySelector(tags) // box em que agrupa as tags
 
     dropzones = Array.from(dropzones) // transformo em array para poder modificar 
+    function coordenadas(elem) {
+            const rect = elem.getBoundingClientRect()
+            return {
+                width: parseInt(rect.width),
+                height: parseInt(rect.height),
+                pageX: parseInt(rect.left),
+                pageY: parseInt(rect.top),
+            }
+        
+    }
 
     function addEventInDropzone(elem) { // função para adicinar evento as dropzonas
         elem.addEventListener('dragenter', dragenter)
         elem.addEventListener('dragover', e => dragover(e), false)
         elem.addEventListener('dragleave', dragleave)
         elem.addEventListener("drop", (e) => drop(e));
+        elem.addEventListener("touchmove", (e) => console.log(e.target));
+        dropzoneMeasurements.push(coordenadas(elem))
         return elem
     }
 
@@ -63,10 +75,10 @@ function Drop(init = false , object) {
 
     // FUNÇÕES DENTRO DO DROP(usadas nos eventos)
     function dragenter() {
-            this.classList.add(classOver)
-            this === discard ? this.classList.add('to_discard_in_Focus') :  this.classList.add('dropzone_in_focus') // ao entar da dropzona, add nela a classe responsável pelo estilo de foco
-               
-            
+        this.classList.add(classOver)
+        this === discard ? this.classList.add('to_discard_in_Focus') : this.classList.add('dropzone_in_focus') // ao entar da dropzona, add nela a classe responsável pelo estilo de foco
+
+
     }
 
     function dragover(e) {
@@ -79,28 +91,28 @@ function Drop(init = false , object) {
 
     function drop(e) {
         e.preventDefault() // necessário para o funcionamento do evento
-         // executa em todos os casos
+        // executa em todos os casos
 
-            // cria e adiciona novo card
-            _newCard = newCard({ elem: addElement(objCard), color: random('color') })
-            addSan(boxTags, _newCard)
+        // cria e adiciona novo card
+        _newCard = newCard({ elem: addElement(objCard), color: random('color') })
+        addSan(boxTags, _newCard)
 
-            // se for área de discarte
-            if (e.target == discard) {
-                e.target.classList.remove('to_discard_in_Focus')
-            } else { // se for os dropzones
-                e.target.classList.remove('dropzone_in_focus') // remove classe responsável pelo estilo de focu.
-                const attr_dropzone = e.target.getAttribute('corresponding_dropZone') //pega  attributo que liga dropzona a tag
-                _number_of_cards = () => Number.parseInt(e.target.getAttribute('number_of_cards')) // transforma em num inteiro, valor do attributo que contem número de card(é usado como função para pegar o valor atualizado quando chamado.)
+        // se for área de discarte
+        if (e.target == discard) {
+            e.target.classList.remove('to_discard_in_Focus')
+        } else { // se for os dropzones
+            e.target.classList.remove('dropzone_in_focus') // remove classe responsável pelo estilo de focu.
+            const attr_dropzone = e.target.getAttribute('corresponding_dropZone') //pega  attributo que liga dropzona a tag
+            _number_of_cards = () => Number.parseInt(e.target.getAttribute('number_of_cards')) // transforma em num inteiro, valor do attributo que contem número de card(é usado como função para pegar o valor atualizado quando chamado.)
 
-                //tags
-                array_boxTags = Array.from(document.querySelectorAll('.tag')) // transforma em array para ser possível pecorrer
-                e.target.setAttribute('number_of_cards', _number_of_cards() + 1) // incrementa a quantidade de cards
-                number_of_cards = _number_of_cards() // pega valor atualizado da  quantidade de cards
+            //tags
+            array_boxTags = Array.from(document.querySelectorAll('.tag')) // transforma em array para ser possível pecorrer
+            e.target.setAttribute('number_of_cards', _number_of_cards() + 1) // incrementa a quantidade de cards
+            number_of_cards = _number_of_cards() // pega valor atualizado da  quantidade de cards
 
-                // -> pega tag correspodente e atualizar valor
-                array_boxTags[attr_dropzone].children[1].innerHTML = formatLargeNumbers(number_of_cards) // escreve na tag
-            }
+            // -> pega tag correspodente e atualizar valor
+            array_boxTags[attr_dropzone].children[1].innerHTML = formatLargeNumbers(number_of_cards) // escreve na tag
         }
+    }
 
 }
