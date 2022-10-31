@@ -68,19 +68,17 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
 
         seEntrouNoDrop.forEach(dZone => {
             if ( dZone.test ) {
-                console.log("dentro do dropzone")
+                console.log("entrou na zona ")
                 dropHere = dZone.element
-            } else {
-                dropHere = ''
             }
         })
     }
+    // troca o for each a cima por um filtro. caso seja falso, dê um "dropHere = ''", e saia do laço
 
     function touchend(e) {
         this.classList.remove('is-dragging')
         obj =  {target: dropHere.elem}
-        console.log(obj.target)
-        dropHere = ''
+        console.log(dropHere.elem)
 
 
     }
