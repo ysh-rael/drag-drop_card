@@ -71,6 +71,9 @@ aside {
     width: 100%;
     height: 100%;
 }
+.is-dragging {
+    position: absolute;
+}
 #atual_card {
     margin: auto;
 }
@@ -704,11 +707,13 @@ aside {
         align-items: flex-start;
         max-height: 100%;
         border-radius: 0;
+        position: relative;
 
     }
 
     .to_rigth {
         height: 60%;
+
 
     }
     #section_cards {
@@ -732,8 +737,7 @@ aside {
         margin: 0 auto auto 0;
         display: flex;
         justify-content: center;
-        align-items: center;
-
+        align-items: center;background-color: aquamarine;
     }
 
     #atual_card {
@@ -741,9 +745,8 @@ aside {
         min-width: 90px;
         height: 7rem;
         min-height: 90px;
-        margin-right: auto;
-        margin-left: 0.6rem;
-        margin-top: 0.6rem;
+        margin:  .6rem 0 .6rem .6rem;
+        position: absolute;
 
         box-shadow: -2px 2px 10px #0000004a
     }

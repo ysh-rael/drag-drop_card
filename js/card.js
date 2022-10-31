@@ -25,15 +25,8 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
 // CARD
     card.addEventListener('dragstart', dragstart)
     card.addEventListener('dragend', dragend)
-    card.addEventListener('touchmove', function (e) {
-        const touchLocation = e.targetTouches[0];
-        const halfWidthOfCard = parseInt(this.offsetWidth / 2)
-        const halfHeightOfCard = parseInt(this.offsetHeight - this.offsetHeight/5)
-        this.style.position = 'absolute'
-        this.style.marginLeft = touchLocation.pageX - halfWidthOfCard + 'px';
-        this.style.marginTop = touchLocation.pageY - halfHeightOfCard + 'px';
-
-    })
+    card.addEventListener('touchmove', touchmove)
+    card.addEventListener('touchend', touchend)
 
     function dragstart() {
         // dropzones.forEach(dropzone => dropzone.classList.add('highlight')) """ para dar um estilo a todas as dropzones """
@@ -48,6 +41,20 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
         this.classList.remove('is-dragging')
     }
     return card
+}
+function touchmove (e) {
+    const touchLocation = e.targetTouches[0];
+    const halfWidthOfCard = parseInt(this.offsetWidth / 2)
+    const halfHeightOfCard = parseInt(this.offsetHeight / 2)
+    this.classList.add('is-dragging')
+    this.style.left = touchLocation.pageX - halfWidthOfCard +'px';
+    this.style.top = touchLocation.pageY - halfHeightOfCard +'px';
+}
+
+function touchend (e) {
+    this.classList.remove('is-dragging')
+
+
 }
 
 
