@@ -70,13 +70,17 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
             if ( dZone.test ) {
                 console.log("dentro do dropzone")
                 dropHere = dZone.element
+            } else {
+                dropHere = ''
             }
         })
     }
 
     function touchend(e) {
         this.classList.remove('is-dragging')
-        console.log(dropHere.elem)
+        obj =  {target: dropHere.elem}
+        console.log(obj.target)
+        dropHere = ''
 
 
     }
