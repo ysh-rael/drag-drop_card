@@ -30,6 +30,7 @@ function Drop(init = false, object) {
                 height: parseInt(rect.height),
                 pageX: parseInt(rect.left),
                 pageY: parseInt(rect.top),
+                elem
             }
         
     }

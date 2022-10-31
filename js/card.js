@@ -21,6 +21,9 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
     const card = document.querySelector(element)
     const dropzones = document.querySelectorAll('.dropzone_tags')
 
+    let seEntrouNoDrop = []
+    let dropHere = '_'
+
 
     // CARD
     card.addEventListener('dragstart', dragstart)
@@ -51,26 +54,29 @@ function Drag(element, pageHtml = false, essentialFunctions = false, ...func) {
         this.style.left = touchLocation.pageX - (WidthOfCard / 2) + 'px';
         this.style.top = touchLocation.pageY - (HeightOfCard / 2) + 'px';
 
-        const seEntrouNoDrop = []
+        seEntrouNoDrop = []
 
         dropzoneMeasurements.forEach(el => {
             seEntrouNoDrop.push(
-                el.pageY <= touchLocation.pageY &&
+                {test : el.pageY <= touchLocation.pageY &&
                 el.pageY + el.height >= touchLocation.pageY &&
                 el.pageX <= touchLocation.pageX &&
-                touchLocation.pageX <= el.pageX + el.width )
+                touchLocation.pageX <= el.pageX + el.width, 
+                element: el
+            })
         })
 
-        seEntrouNoDrop.forEach(test => {
-            if ( test ) {
+        seEntrouNoDrop.forEach(dZone => {
+            if ( dZone.test ) {
                 console.log("dentro do dropzone")
+                dropHere = dZone.element
             }
         })
     }
 
     function touchend(e) {
         this.classList.remove('is-dragging')
-        console.log(dropzoneMeasurements)
+        console.log(dropHere.elem)
 
 
     }
