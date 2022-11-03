@@ -142,3 +142,7 @@ const random = (type = 'color') => {
         }
     }
 }
+
+
+
+

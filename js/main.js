@@ -8,7 +8,21 @@ let objectDrop = {
     is_draging: '.is-dragging',
     tags: "#tags",
     title_tag: "Sem nome",
-    essentialFunctions: { addSan, removeSan, tag, addElement, random }
+    essentialFunctions: { addSan, removeSan, tag, addElement, random}
+}
+
+const objDrag = {
+    classDropzone: 'dropzone_tags',
+    to_discard: '.to_discard',
+    tags: "#tags",
+    essentialFunctions: {
+        addSan,
+        removeSan,
+        tag,
+        addElement,
+        random,
+        drop
+    }
 }
 
 const objCard = {
@@ -19,7 +33,8 @@ const objCard = {
     attribute: [
         { key: 'draggable', value: true },
         { key: 'droppable', value: true }
-    ]
+    ],
+    essentialFunctions: { addSan, removeSan, tag, addElement, random }
 }
 
 let dropzoneMeasurements = []
@@ -27,5 +42,5 @@ let dropzoneMeasurements = []
 
 
 newCard({ elem: addElement(objCard), color: random('color') })
-Drag('#' + objCard.id, false);
+Drag('#' + objCard.id, false, objDrag);
 Drop(true, objectDrop)
