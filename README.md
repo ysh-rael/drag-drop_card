@@ -1,4 +1,6 @@
-![IMG LOGO](imagens/logo_input-range.png)
+![IMG LOGO](https://user-images.githubusercontent.com/79410863/199850943-5ffe79e9-4614-40ca-bd27-8f09ced420fe.png)
+
+**Project created to study drop and drag events in JS.**
 
 Here are the technologies used in this project.
  
@@ -6,21 +8,17 @@ Here are the technologies used in this project.
 * JavaScript
 * Html5
 * CSS3
-* ...
 
 under development
-* NodeJs v16.13.1
-* npm v8.1.2
-* Browser-sync
+* NodeJs v12.22.9
+* npm v8.5.1
 * GIMP v2.0
- 
+* Inskscape v1.2
+* Figma
  
 ## Services Used
- 
 * Github
  
-<!-- ## Ruby Gems
-... -->
  
 ## Getting started
 * To run the project:
@@ -53,38 +51,32 @@ DESCREVE ALGO<br>
  
 ## Features
  
- * Video control bar with features of:
-	- play
-	- pause
-	- video timer
-	- progress bar control.
- * Local video and image hosting
+ * 
+ * 
  * Favicon and logo
  * Responsive:
-	- Mobile ✔️
-	- Desktop ✔️
+	- Mobile  ✔️
+	- Desktop  ✔️
  
  
 ## Links
  
-  - Link of deployed application: https://ysh-rael.github.io/input-range/
-  - Repository: https://github.com/ysh-rael/input-range/
+  - Link of deployed application: https://ysh-rael.github.io/drag-drop_card/
+  - Repository: https://github.com/ysh-rael/drag-drop_card/
  
  
-## Versioning
+## Versioning and License
  
 1.0.0.0
  
  
 ## Authors
  
-* **Yshrael Pimentel**: @Ysh-rael (https://github.com/ysh-rael)
+* **Yshrael Pimentel**: [@Ysh-rael](https://github.com/ysh-rael)
  
  
 Please follow github and join us!
 Thanks to visiting me and good coding!
-
-
 
 
 
