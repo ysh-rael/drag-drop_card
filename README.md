@@ -5,9 +5,9 @@
 Here are the technologies used in this project.
  
 
-* JavaScript
-* Html5
-* CSS3
+* ![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)
+* ![Html5](https://img.shields.io/badge/-HTML5-05122A?style=flat&logo=html5)
+* ![CSS3](https://img.shields.io/badge/-CSS3-05122A?style=flat&logo=css3)
 
 under development
 * NodeJs v12.22.9
@@ -66,9 +66,9 @@ DESCREVE ALGO<br>
  
  
 ## Versioning and License
- 
-1.0.0.0
- 
+
+![license](https://img.shields.io/github/license/ysh-rael/drag-drop_card)<br>
+![version](https://img.shields.io/github/package-json/v/ysh-rael/drag-drop_card)
  
 ## Authors
  
