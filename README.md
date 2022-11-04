@@ -44,14 +44,8 @@ under development
 
 **Description of each part**<br>
 
-![menu-create_explicacao](https://user-images.githubusercontent.com/79410863/199863082-b78207f7-66a3-49bb-9845-d9a77abdbc1f.png)
-![explicacao-dropzonas-tags](https://user-images.githubusercontent.com/79410863/199863192-00996735-fe74-4010-8450-61e7857d60b5.png)
-
-
-
+![conjunto-de-descricao](https://user-images.githubusercontent.com/79410863/199870046-e5dd6ec0-d172-4b7d-9458-3908b9e14a4b.png)
 	
- 
- 
 ## Features
  
  * Card discard zone
