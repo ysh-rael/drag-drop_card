@@ -17,8 +17,7 @@ under development
 * Figma
  
 ## Services Used
-* Github
- 
+* Github page
  
 ## Getting started
 * To run the project:
@@ -26,22 +25,24 @@ under development
  
 ## How to use
  
-PALAVRAS E PALÇAVRAS.<br>
+<p>
+	Create a drop zone in the menu at the top of the chevron on the right. After creating it, you will notice that the dropzone and a side tag will be generated, with the title defined at creation, as well as a counter to count the amount of cards dropped in the dropezone.
+</p>
 
-MAIS PALAVRAS PROVAVELMENTE EM INGLÊS.<br>
-
+<p>
+	Drag the card to the desired drop zone and release it. if you want to discard the card, drag it to the discard zone, located below the card.
+</p>
 
 ![gif](https://j.gifs.com/MZN3.gif)<br>
 
 [//]: # "https://gifs.com/gif/inputrange2-1-MZN4O3 ---> link do gif otimizado alternativo"
 	
 	
-MAIS PALAVRAS<br>
-	
-	
+**Print Screen<br>**
+
 ![print-responsivo-semfundo](https://user-images.githubusercontent.com/79410863/199864827-0ccd6a68-17b6-4dde-bafc-536a8b485d11.png)
 
-DESCREVE ALGO<br>
+**Description of each part**<br>
 
 ![menu-create_explicacao](https://user-images.githubusercontent.com/79410863/199863082-b78207f7-66a3-49bb-9845-d9a77abdbc1f.png)
 ![explicacao-dropzonas-tags](https://user-images.githubusercontent.com/79410863/199863192-00996735-fe74-4010-8450-61e7857d60b5.png)
@@ -61,6 +62,7 @@ DESCREVE ALGO<br>
  * Responsive:
 	- Mobile  ✔️
 	- Desktop  ✔️
+* supports touch events
 * Commented code
  
  
