@@ -14,7 +14,7 @@ under development
 * npm v8.5.1
 * GIMP v2.0
 * Inskscape v1.2
-* Figma 0.10.0
+* Figma v0.10.0
  
 ## Services Used
 * Github page
