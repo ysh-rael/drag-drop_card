@@ -51,12 +51,15 @@ DESCREVE ALGO<br>
  
 ## Features
  
- * 
- * 
+ * Card discard zone
+ * Creating dropzones
+ * Customize dropzone background
+ * Tags with count of cards dropped inside the drop zone
  * Favicon and logo
  * Responsive:
 	- Mobile  ✔️
 	- Desktop  ✔️
+* Commented code
  
  
 ## Links
