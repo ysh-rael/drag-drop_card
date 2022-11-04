@@ -39,7 +39,7 @@ MAIS PALAVRAS PROVAVELMENTE EM INGLÊS.<br>
 MAIS PALAVRAS<br>
 	
 	
-![print-responsivo](https://user-images.githubusercontent.com/79410863/199864343-6b5b80e1-fb93-4e2e-8382-abafd5ec01d1.png)
+![print-responsivo-semfundo](https://user-images.githubusercontent.com/79410863/199864827-0ccd6a68-17b6-4dde-bafc-536a8b485d11.png)
 
 DESCREVE ALGO<br>
 
