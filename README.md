@@ -39,11 +39,12 @@ MAIS PALAVRAS PROVAVELMENTE EM INGLÊS.<br>
 MAIS PALAVRAS<br>
 	
 	
-![IMG](imagens/02.png)
-![IMG](imagens/01.png)<br>
+![print-desktop](https://user-images.githubusercontent.com/79410863/199863391-b4b99b73-43e5-4af1-9391-ea77aeb459b4.png)
 DESCREVE ALGO<br>
-<img src="Screenshot_20220121-024001.png">
-<img src="Screenshot_20220121-024017.png">
+
+![menu-create_explicacao](https://user-images.githubusercontent.com/79410863/199863082-b78207f7-66a3-49bb-9845-d9a77abdbc1f.png)
+![explicacao-dropzonas-tags](https://user-images.githubusercontent.com/79410863/199863192-00996735-fe74-4010-8450-61e7857d60b5.png)
+
 
 
 	
@@ -80,6 +81,7 @@ DESCREVE ALGO<br>
  
 Please follow github and join us!
 Thanks to visiting me and good coding!
+
 
 
 
