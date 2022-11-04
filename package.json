@@ -1,7 +1,7 @@
 {
   "name": "drag-drop_card",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project created to study drop and drag events in JS.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
