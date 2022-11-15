@@ -143,6 +143,16 @@ const random = (type = 'color') => {
     }
 }
 
+function coordinate(elem) {
+    const rect = elem.getBoundingClientRect()
+    return {
+        width: parseInt(rect.width),
+        height: parseInt(rect.height),
+        pageX: parseInt(rect.left),
+        pageY: parseInt(rect.top),
+        elem
+    }
 
+}
 
 

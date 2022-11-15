@@ -68,7 +68,9 @@ function Drag(element, pageHtml = false, obj, essentialFunctions = false, ...fun
                         el.pageY <= touchLocation.pageY &&
                         el.pageY + el.height >= touchLocation.pageY &&
                         el.pageX <= touchLocation.pageX &&
-                        touchLocation.pageX <= el.pageX + el.width,
+                        touchLocation.pageX <= el.pageX + el.width &&
+                       ( el.height/2 )+ el.pageY <= visualLimit
+                        ,
                     element: el
                 })
         })

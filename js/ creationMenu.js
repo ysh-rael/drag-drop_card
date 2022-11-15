@@ -17,7 +17,7 @@ const objectDrop = {
     tags: "#tags",
     title_tag: (nameDrop.value == false) && (nameDrop.value !== '0') ? "Sem nome" :  nameDrop.value,
     color: colorDrop,
-    essentialFunctions: { addSan, removeSan, tag, addElement, random }
+    essentialFunctions: { addSan, removeSan, tag, addElement, random, coordinate }
 }
     Drop(false, objectDrop)
     nameDrop.value = ''

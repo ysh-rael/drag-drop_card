@@ -13,7 +13,7 @@ function Drop(init = false, object) {
         color = object.color
     essentialFunctions = object.essentialFunctions
 
-    const { addSan, addElement, random } = essentialFunctions // extraio funções das quais preciso
+    const { addSan, addElement, coordinate } = essentialFunctions // extraio funções das quais preciso
 
     const div = () => document.createElement('div') // cria um elemento html (div)
     const elementParent = document.querySelector(_elementParent) // pega o elemento pai
@@ -23,24 +23,13 @@ function Drop(init = false, object) {
     const boxTags = document.querySelector(tags) // box em que agrupa as tags
 
     dropzones = Array.from(dropzones) // transformo em array para poder modificar 
-    function coordenadas(elem) {
-            const rect = elem.getBoundingClientRect()
-            return {
-                width: parseInt(rect.width),
-                height: parseInt(rect.height),
-                pageX: parseInt(rect.left),
-                pageY: parseInt(rect.top),
-                elem
-            }
-        
-    }
 
     function addEventInDropzone(elem) { // função para adicinar evento as dropzonas
         elem.addEventListener('dragenter', dragenter)
         elem.addEventListener('dragover', e => e.preventDefault(), false) // necessário para o funcionamento do evento drop
         elem.addEventListener('dragleave', dragleave)
-        elem.addEventListener("drop", event => drop(event, {boxTags, discard}));
-        dropzoneMeasurements.push(coordenadas(elem))
+        elem.addEventListener("drop", event => drop(event, { boxTags, discard }));
+        dropzoneMeasurements.push(coordinate(elem))
         return elem
     }
 

@@ -8,7 +8,7 @@ let objectDrop = {
     is_draging: '.is-dragging',
     tags: "#tags",
     title_tag: "Sem nome",
-    essentialFunctions: { addSan, removeSan, tag, addElement, random}
+    essentialFunctions: { addSan, removeSan, tag, addElement, random, coordinate }
 }
 
 const objDrag = {
