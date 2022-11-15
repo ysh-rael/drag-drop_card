@@ -8,7 +8,7 @@ function getCoordCurrent(zone) {
     return coord
 }
 const { height, pageY } = getCoordCurrent(dropzones)
-let visualLimit = height
+let visualLimit = height + pageY
 
 
 dropzones.addEventListener('scroll', () => {
