@@ -1,4 +1,5 @@
-const dropzone = document.getElementById('dropzones')
+const dropzones = document.getElementById('dropzones')
+
 function getCoordCurrent(zone) {
     if( zone ) {
 
@@ -6,14 +7,20 @@ function getCoordCurrent(zone) {
     const coord = coordinate(zone)
     return coord
 }
-const { height, pageY } = getCoordCurrent(dropzone)
+const { height, pageY } = getCoordCurrent(dropzones)
 let visualLimit = height
 
-const cl = algo => console.log(algo)
+
+dropzones.addEventListener('scroll', () => {
+    const currentDropzoneMeasurements = dropzoneMeasurements.map((e, i, a) => {
+        return getCoordCurrent(e.elem)
+    })
+    dropzoneMeasurements = currentDropzoneMeasurements
+})
+
 window.onresize = () => {
-    const { height, pageY } = getCoordCurrent(dropzone)
+    const { height, pageY } = getCoordCurrent(dropzones)
     visualLimit = height + pageY
-    cl("😈 Limite Visual: ")
-    cl(visualLimit)
-    cl(dropzoneMeasurements)
+    console.log("😈 Limite Visual: ", visualLimit)
+ 
 }
